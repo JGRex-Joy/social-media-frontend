@@ -1,4 +1,5 @@
 import React from 'react'
+import { Inbox } from 'lucide-react'
 
 export function Spinner({ size = 24, color = 'var(--accent)' }) {
   return (
@@ -16,11 +17,12 @@ export function LoadingScreen() {
   )
 }
 
-export function EmptyState({ icon = '📭', title = 'Пусто', description = '' }) {
+export function EmptyState({ icon, title = 'Пусто', description = '' }) {
+  const defaultIcon = <Inbox size={48} />
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4rem 2rem', color: 'var(--text3)', textAlign: 'center', gap: '0.75rem' }}>
-      <div style={{ fontSize: '3rem', lineHeight: 1 }}>{icon}</div>
-      <p style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text2)', fontFamily: 'Syne, sans-serif' }}>{title}</p>
+      <div style={{ lineHeight: 1, display: 'flex', justifyContent: 'center' }}>{icon || defaultIcon}</div>
+      <p style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text2)', fontFamily: 'Montserrat, sans-serif' }}>{title}</p>
       {description && <p style={{ fontSize: '0.875rem' }}>{description}</p>}
     </div>
   )

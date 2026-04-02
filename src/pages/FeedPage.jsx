@@ -6,6 +6,7 @@ import PostCard from '../components/PostCard'
 import Avatar from '../components/Avatar'
 import StoriesBar from '../components/StoriesBar'
 import { LoadingScreen, EmptyState } from '../components/ui'
+import { Camera, Check } from 'lucide-react'
 
 const FEED_CACHE_KEY = 'feedPage_cache'
 
@@ -66,7 +67,7 @@ export default function FeedPage() {
 
           {loading ? <LoadingScreen /> : posts.length === 0 ? (
             <EmptyState
-              icon="📷"
+              icon={<Camera size={48} />}
               title="Лента пуста"
               description="Подпишитесь на людей, чтобы видеть их публикации"
             />
@@ -82,7 +83,7 @@ export default function FeedPage() {
                 </button>
               )}
               {!hasMore && posts.length > 0 && (
-                <div style={{ textAlign: 'center', padding: '2rem', fontSize: '0.875rem', color: 'var(--text3)' }}>Вы всё посмотрели ✓</div>
+                <div style={{ textAlign: 'center', padding: '2rem', fontSize: '0.875rem', color: 'var(--text3)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>Вы всё посмотрели <Check size={14} /></div>
               )}
             </div>
           )}

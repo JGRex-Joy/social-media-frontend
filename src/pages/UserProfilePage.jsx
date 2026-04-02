@@ -6,6 +6,7 @@ import { useToast } from '../context/ToastContext'
 import Avatar from '../components/Avatar'
 import { LoadingScreen, EmptyState, Pagination, Spinner } from '../components/ui'
 import { formatDate } from '../utils'
+import { CheckCircle, Camera, UserX, Heart, MessageSquare } from 'lucide-react'
 
 export default function UserProfilePage() {
   const { id } = useParams()
@@ -81,7 +82,7 @@ export default function UserProfilePage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
             <h1 style={{ fontSize: '1.4rem', fontWeight: 400, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 6 }}>
               {profile.username}
-              {profile.is_verified && <span style={{ color: 'var(--accent)', fontSize: 14 }}>✓</span>}
+              {profile.is_verified && <span style={{ color: 'var(--accent)', fontSize: 14, display: 'inline-flex' }}><CheckCircle size={16} /></span>}
             </h1>
             {isMe ? (
               <Link to="/profile" className="btn-ghost" style={{ padding: '0.375rem 1rem', fontSize: '0.875rem' }}>Редактировать</Link>
@@ -136,7 +137,7 @@ export default function UserProfilePage() {
       {/* Posts grid */}
       {tab === 'posts' && (
         posts.length === 0 ? (
-          <EmptyState icon="📷" title="Публикаций нет"
+          <EmptyState icon={<Camera size={48} />} title="Публикаций нет"
             description={isMe ? 'Поделитесь первой фотографией или постом' : undefined} />
         ) : (
           <>
@@ -155,8 +156,8 @@ export default function UserProfilePage() {
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', opacity: 0, transition: 'opacity 0.15s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem' }}
                       onMouseEnter={e => e.currentTarget.style.opacity = 1}
                       onMouseLeave={e => e.currentTarget.style.opacity = 0}>
-                      <span style={{ color: '#fff', fontSize: '0.875rem', fontWeight: 700 }}>♥ {post.likes_count}</span>
-                      <span style={{ color: '#fff', fontSize: '0.875rem', fontWeight: 700 }}>💬 {post.comments_count}</span>
+                      <span style={{ color: '#fff', fontSize: '0.875rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}><Heart size={14} fill="white" /> {post.likes_count}</span>
+                      <span style={{ color: '#fff', fontSize: '0.875rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4 }}><MessageSquare size={14} /> {post.comments_count}</span>
                     </div>
                   </Link>
                 )
@@ -170,7 +171,7 @@ export default function UserProfilePage() {
       {/* Followers / Following */}
       {(tab === 'followers' || tab === 'following') && (
         socialLoading ? <LoadingScreen /> : socialList.length === 0 ? (
-          <EmptyState icon="👤" title={tab === 'followers' ? 'Нет подписчиков' : 'Нет подписок'} />
+          <EmptyState icon={<UserX size={48} />} title={tab === 'followers' ? 'Нет подписчиков' : 'Нет подписок'} />
         ) : (
           <div className="card" style={{ overflow: 'hidden' }}>
             {socialList.map((u, i) => (
@@ -184,7 +185,7 @@ export default function UserProfilePage() {
                 <Avatar user={u} size="md" />
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                    {u.username} {u.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11 }}>✓</span>}
+                    {u.username} {u.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11, display: 'inline-flex' }}><CheckCircle size={12} /></span>}
                   </div>
                   {u.full_name && <div style={{ fontSize: '0.8rem', color: 'var(--text3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.full_name}</div>}
                 </div>

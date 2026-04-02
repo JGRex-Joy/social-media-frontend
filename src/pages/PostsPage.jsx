@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { postsAPI } from '../services/api'
 import PostCard from '../components/PostCard'
 import { LoadingScreen, EmptyState, Pagination, PageHeader } from '../components/ui'
+import { FileText, X } from 'lucide-react'
 
 const POSTS_CACHE_KEY = 'postsPage_cache'
 
@@ -68,12 +69,12 @@ export default function PostsPage() {
           <option value="popular">Популярные</option>
         </select>
         {search && (
-          <button type="button" onClick={() => { setSearch('') }} className="btn-ghost" style={{ padding: '0.5rem 0.875rem' }}>✕</button>
+          <button type="button" onClick={() => { setSearch('') }} className="btn-ghost" style={{ padding: '0.5rem 0.875rem', display: 'flex', alignItems: 'center' }}><X size={16} /></button>
         )}
       </div>
 
       {loading ? <LoadingScreen /> : posts.length === 0 ? (
-        <EmptyState icon="📝" title="Нет публикаций" description={search ? `По запросу «${search}» ничего не найдено` : 'Пока никто ничего не опубликовал'} />
+        <EmptyState icon={<FileText size={48} />} title="Нет публикаций" description={search ? `По запросу «${search}» ничего не найдено` : 'Пока никто ничего не опубликовал'} />
       ) : (
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

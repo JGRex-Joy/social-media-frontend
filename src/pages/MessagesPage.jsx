@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { useToast } from '../context/ToastContext'
 import Avatar from '../components/Avatar'
 import { timeAgo, formatTime } from '../utils'
+import { Hand } from 'lucide-react'
 
 export default function MessagesPage() {
   const { userId } = useParams()
@@ -136,7 +137,7 @@ export default function MessagesPage() {
       {/* Sidebar */}
       <div className={`chat-sidebar ${userId ? 'hidden-mobile' : ''}`}>
         <div style={{ padding: '1.25rem 1rem 0.75rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem', fontFamily: 'Syne, sans-serif' }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem', fontFamily: 'Montserrat, sans-serif' }}>
             Сообщения
           </h2>
           {/* Instant search */}
@@ -283,7 +284,7 @@ export default function MessagesPage() {
                 </div>
               ) : messages.length === 0 ? (
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--text3)', gap: '0.75rem' }}>
-                  <div style={{ fontSize: '2.5rem' }}>👋</div>
+                  <div style={{ display: 'flex', justifyContent: 'center', color: 'var(--text3)' }}><Hand size={40} /></div>
                   <p style={{ fontWeight: 600, color: 'var(--text2)' }}>
                     {activeUser ? `Напишите ${activeUser.full_name || activeUser.username}!` : 'Начните диалог'}
                   </p>
@@ -292,9 +293,9 @@ export default function MessagesPage() {
                     <button
                       className="btn-ghost"
                       style={{ marginTop: '0.5rem' }}
-                      onClick={() => { setText('Привет! 👋'); }}
+                      onClick={() => { setText('Привет!'); }}
                     >
-                      👋 Поздороваться
+                      <Hand size={14} style={{ display: 'inline', marginRight: 4 }} /> Поздороваться
                     </button>
                   )}
                 </div>
@@ -401,8 +402,8 @@ function ConvoRow({ user, isActive, unread, unreadCount, lastMsg, meId, onClick,
           )}
         </div>
         {isNew ? (
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 600 }}>
-            👋 Поздоровайтесь!
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 3 }}>
+            <Hand size={11} /> Поздоровайтесь!
           </span>
         ) : lastMsg ? (
           <div style={{ fontSize: '0.8rem', color: unread ? 'var(--text2)' : 'var(--text3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%', display: 'block' }}>

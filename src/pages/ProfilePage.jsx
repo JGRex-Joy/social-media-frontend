@@ -5,6 +5,7 @@ import { usersAPI, postsAPI, mediaURL } from '../services/api'
 import Avatar from '../components/Avatar'
 import { Spinner, PageHeader } from '../components/ui'
 import { getApiError } from '../utils'
+import { Camera } from 'lucide-react'
 
 export default function ProfilePage() {
   const { user, updateUser } = useAuth()
@@ -93,7 +94,7 @@ export default function ProfilePage() {
             { label: 'Подписок', value: liveStats.following_count },
           ].map(s => (
             <div key={s.label} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.25rem', fontWeight: 700, fontFamily: 'Syne, sans-serif', color: 'var(--text)' }}>{s.value ?? 0}</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 700, fontFamily: 'Montserrat, sans-serif', color: 'var(--text)' }}>{s.value ?? 0}</div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text3)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{s.label}</div>
             </div>
           ))}
@@ -136,7 +137,7 @@ export default function ProfilePage() {
                 <div style={{ fontSize: '0.75rem', color: 'var(--text3)', marginBottom: '0.75rem' }}>{user?.email}</div>
                 <button type="button" onClick={() => fileRef.current?.click()} disabled={avatarUploading}
                   style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, opacity: avatarUploading ? 0.5 : 1 }}>
-                  {avatarUploading ? 'Загружаем...' : '📷 Загрузить фото'}
+                  {avatarUploading ? 'Загружаем...' : <><Camera size={14} style={{ display: 'inline', marginRight: 4 }} />Загрузить фото</>}
                 </button>
                 <p style={{ fontSize: '0.7rem', color: 'var(--text3)', marginTop: 4 }}>JPEG, PNG, GIF · до 5 МБ</p>
               </div>

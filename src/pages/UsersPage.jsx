@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { useToast } from '../context/ToastContext'
 import Avatar from '../components/Avatar'
 import { LoadingScreen, EmptyState, Pagination, PageHeader } from '../components/ui'
+import { UserX, CheckCircle } from 'lucide-react'
 
 export default function UsersPage() {
   const { user: me } = useAuth()
@@ -64,7 +65,7 @@ export default function UsersPage() {
       </div>
 
       {loading ? <LoadingScreen /> : users.length === 0 ? (
-        <EmptyState icon="👤" title="Никого не найдено"
+        <EmptyState icon={<UserX size={48} />} title="Никого не найдено"
           description={search ? `По запросу «${search}» никого нет` : 'Здесь пока никого нет'} />
       ) : (
         <>
@@ -83,7 +84,7 @@ export default function UsersPage() {
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 4 }}>
                       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.username}</span>
-                      {u.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11, flexShrink: 0 }}>✓</span>}
+                      {u.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11, flexShrink: 0, display: 'inline-flex' }}><CheckCircle size={12} /></span>}
                     </div>
                     <div style={{ fontSize: '0.8rem', color: 'var(--text3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {u.full_name || `${u.followers_count} подписчиков`}

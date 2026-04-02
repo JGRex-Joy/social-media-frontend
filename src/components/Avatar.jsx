@@ -31,7 +31,7 @@ export default function Avatar({ user, size = 'md', ring = false }) {
       width: s.px, height: s.px, borderRadius: '50%',
       background: color, color: '#fff', fontSize: s.text,
       fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center',
-      flexShrink: 0, fontFamily: 'Syne, sans-serif',
+      flexShrink: 0, fontFamily: 'Montserrat, sans-serif',
     }}>
       {initials}
     </div>

@@ -3,6 +3,7 @@ import { storiesAPI, mediaURL } from '../services/api'
 import { useToast } from '../context/ToastContext'
 import Avatar from './Avatar'
 import { Spinner } from './ui'
+import { Camera, X } from 'lucide-react'
 
 function StoryViewer({ stories, startIndex, onClose, onDelete, currentUserId }) {
   const [idx, setIdx] = useState(startIndex)
@@ -66,7 +67,7 @@ function StoryViewer({ stories, startIndex, onClose, onDelete, currentUserId }) 
           {story.author_id === currentUserId && (
             <button onClick={handleDelete} style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', background: 'rgba(0,0,0,0.4)', border: 'none', borderRadius: 999, padding: '2px 8px', cursor: 'pointer' }}>Удалить</button>
           )}
-          <button onClick={onClose} style={{ color: '#fff', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.25rem', lineHeight: 1 }}>✕</button>
+          <button onClick={onClose} style={{ color: '#fff', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.25rem', lineHeight: 1, display: 'flex' }}><X size={20} /></button>
         </div>
         {/* Image */}
         <img src={mediaURL(story.image_url)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -128,7 +129,7 @@ function CreateStoryModal({ onClose, onCreated }) {
       <div className="modal" style={{ maxWidth: 360 }} onClick={e => e.stopPropagation()}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--text3)', cursor: 'pointer', fontSize: '0.875rem' }}>Отмена</button>
-          <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700 }}>Новая история</h3>
+          <h3 style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700 }}>Новая история</h3>
           <button onClick={handleSubmit} disabled={!file || uploading} className="btn-primary" style={{ padding: '0.375rem 0.875rem', fontSize: '0.8rem' }}>
             {uploading ? <Spinner size={14} color="#fff" /> : 'Поделиться'}
           </button>
@@ -140,7 +141,7 @@ function CreateStoryModal({ onClose, onCreated }) {
             <img src={preview} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           ) : (
             <div style={{ textAlign: 'center', color: 'var(--text3)' }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>📷</div>
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem', display: 'flex', justifyContent: 'center' }}><Camera size={40} /></div>
               <p style={{ fontSize: '0.875rem' }}>Нажмите, чтобы выбрать фото</p>
               <p style={{ fontSize: '0.75rem', marginTop: '0.25rem', opacity: 0.6 }}>JPEG, PNG, GIF до 10 МБ</p>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { MessageSquare, Camera, Users } from 'lucide-react'
 
 export default function HomePage() {
   const { user } = useAuth()
@@ -34,9 +35,9 @@ export default function HomePage() {
         </div>
 
         <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', marginTop: '3rem', flexWrap: 'wrap' }}>
-          {[['💬', 'Чат в реальном времени'], ['📷', 'Делитесь моментами'], ['👥', 'Находите друзей']].map(([icon, label]) => (
+          {[[<MessageSquare size={18} />, 'Чат в реальном времени'], [<Camera size={18} />, 'Делитесь моментами'], [<Users size={18} />, 'Находите друзей']].map(([icon, label]) => (
             <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text3)', fontSize: '0.875rem' }}>
-              <span style={{ fontSize: '1.1rem' }}>{icon}</span> {label}
+              {icon} {label}
             </div>
           ))}
         </div>

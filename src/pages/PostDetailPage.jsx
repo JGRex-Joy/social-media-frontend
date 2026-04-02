@@ -6,6 +6,7 @@ import { useToast } from '../context/ToastContext'
 import Avatar from '../components/Avatar'
 import { LoadingScreen, Spinner } from '../components/ui'
 import { timeAgo } from '../utils'
+import { CheckCircle, Pencil, X } from 'lucide-react'
 
 const HeartIcon = ({ filled }) => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill={filled ? '#ef4444' : 'none'} stroke={filled ? '#ef4444' : 'currentColor'} strokeWidth="1.8">
@@ -74,8 +75,8 @@ function Comment({ comment, postId, onDelete, onUpdate }) {
             </div>
             {isOwner && !editing && (
               <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
-                <button onClick={() => setEditing(true)} style={{ fontSize: '0.75rem', color: 'var(--text3)', background: 'none', border: 'none', cursor: 'pointer' }}>✎</button>
-                <button onClick={handleDelete} style={{ fontSize: '0.75rem', color: 'var(--text3)', background: 'none', border: 'none', cursor: 'pointer' }}>✕</button>
+                <button onClick={() => setEditing(true)} style={{ fontSize: '0.75rem', color: 'var(--text3)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex' }}><Pencil size={13} /></button>
+                <button onClick={handleDelete} style={{ fontSize: '0.75rem', color: 'var(--text3)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex' }}><X size={13} /></button>
               </div>
             )}
           </div>
@@ -200,7 +201,7 @@ export default function PostDetailPage() {
                 <Avatar user={post.author} size="sm" />
                 <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 4 }}>
                   {post.author.username}
-                  {post.author.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11 }}>✓</span>}
+                  {post.author.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11, display: 'inline-flex' }}><CheckCircle size={12} /></span>}
                 </div>
               </Link>
               {isOwner && (
@@ -264,7 +265,7 @@ export default function PostDetailPage() {
               <form onSubmit={handleComment} style={{ borderTop: '1px solid var(--border)', padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <input value={commentText} onChange={e => setCommentText(e.target.value)}
                   placeholder="Добавьте комментарий..."
-                  style={{ flex: 1, background: 'transparent', border: 'none', color: 'var(--text)', fontSize: '0.875rem', fontFamily: 'DM Sans, sans-serif' }} />
+                  style={{ flex: 1, background: 'transparent', border: 'none', color: 'var(--text)', fontSize: '0.875rem', fontFamily: 'Montserrat, sans-serif' }} />
                 <button type="submit" disabled={!commentText.trim() || commentLoading}
                   style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer', opacity: !commentText.trim() ? 0.4 : 1 }}>
                   {commentLoading ? <Spinner size={14} /> : 'Опубл.'}

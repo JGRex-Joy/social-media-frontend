@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react'
+import { Check, X, AlertTriangle } from 'lucide-react'
 
 const ToastContext = createContext(null)
 
@@ -25,9 +26,9 @@ export function ToastProvider({ children }) {
             style={{ cursor: 'pointer' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              {toast.type === 'success' && <span style={{ color: 'var(--green)' }}>✓</span>}
-              {toast.type === 'error' && <span style={{ color: 'var(--red)' }}>✕</span>}
-              {toast.type === 'warning' && <span style={{ color: 'var(--yellow)' }}>⚠</span>}
+              {toast.type === 'success' && <span style={{ color: 'var(--green)', display: 'flex' }}><Check size={15} /></span>}
+              {toast.type === 'error' && <span style={{ color: 'var(--red)', display: 'flex' }}><X size={15} /></span>}
+              {toast.type === 'warning' && <span style={{ color: 'var(--yellow)', display: 'flex' }}><AlertTriangle size={15} /></span>}
               <span>{toast.message}</span>
             </div>
           </div>

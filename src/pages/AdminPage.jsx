@@ -6,6 +6,7 @@ import { useToast } from '../context/ToastContext'
 import Avatar from '../components/Avatar'
 import { LoadingScreen, PageHeader } from '../components/ui'
 import { timeAgo, getApiError } from '../utils'
+import { User, Users, FileText, MessageSquare, Heart, BarChart2, Pin, X } from 'lucide-react'
 
 export default function AdminPage() {
   const { user } = useAuth()
@@ -75,7 +76,7 @@ export default function AdminPage() {
     catch { addToast('Ошибка', 'error') }
   }
 
-  const TABS = [{ key: 'stats', label: '📊 Статистика' }, { key: 'users', label: '👤 Пользователи' }, { key: 'posts', label: '📝 Посты' }]
+  const TABS = [{ key: 'stats', label: 'Статистика' }, { key: 'users', label: 'Пользователи' }, { key: 'posts', label: 'Посты' }]
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '1.5rem 1.25rem 3rem' }}>
@@ -99,15 +100,15 @@ export default function AdminPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
             {[
-              { label: 'Пользователей', value: stats.total_users, icon: '👤', color: 'var(--accent)' },
-              { label: 'Активных', value: stats.active_users, icon: '✅', color: 'var(--green)' },
-              { label: 'Постов', value: stats.total_posts, icon: '📝', color: '#f97316' },
-              { label: 'Комментариев', value: stats.total_comments, icon: '💬', color: '#4fc3f7' },
-              { label: 'Лайков', value: stats.total_likes, icon: '♥', color: 'var(--red)' },
+              { label: 'Пользователей', value: stats.total_users, icon: <User size={22} color="var(--accent)" />, color: 'var(--accent)' },
+              { label: 'Активных', value: stats.active_users, icon: <Users size={22} color="var(--green)" />, color: 'var(--green)' },
+              { label: 'Постов', value: stats.total_posts, icon: <FileText size={22} color="#f97316" />, color: '#f97316' },
+              { label: 'Комментариев', value: stats.total_comments, icon: <MessageSquare size={22} color="#4fc3f7" />, color: '#4fc3f7' },
+              { label: 'Лайков', value: stats.total_likes, icon: <Heart size={22} color="var(--red)" />, color: 'var(--red)' },
             ].map(s => (
               <div key={s.label} className="card" style={{ padding: '1.25rem', textAlign: 'center' }}>
-                <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{s.icon}</div>
-                <div style={{ fontSize: '1.75rem', fontWeight: 800, color: s.color, fontFamily: 'Syne, sans-serif' }}>{(s.value || 0).toLocaleString()}</div>
+                <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem', display: 'flex', justifyContent: 'center' }}>{s.icon}</div>
+                <div style={{ fontSize: '1.75rem', fontWeight: 800, color: s.color, fontFamily: 'Montserrat, sans-serif' }}>{(s.value || 0).toLocaleString()}</div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text3)', marginTop: 2 }}>{s.label}</div>
               </div>
             ))}
@@ -115,12 +116,12 @@ export default function AdminPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
             <div className="card" style={{ padding: '1.25rem', textAlign: 'center' }}>
               <div style={{ fontSize: '0.8rem', color: 'var(--text3)', marginBottom: 4 }}>Новых сегодня</div>
-              <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--green)', fontFamily: 'Syne, sans-serif' }}>+{stats.new_users_today || 0}</div>
+              <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--green)', fontFamily: 'Montserrat, sans-serif' }}>+{stats.new_users_today || 0}</div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text3)' }}>пользователей</div>
             </div>
             <div className="card" style={{ padding: '1.25rem', textAlign: 'center' }}>
               <div style={{ fontSize: '0.8rem', color: 'var(--text3)', marginBottom: 4 }}>Новых постов</div>
-              <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'Syne, sans-serif' }}>+{stats.new_posts_today || 0}</div>
+              <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'Montserrat, sans-serif' }}>+{stats.new_posts_today || 0}</div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text3)' }}>за сегодня</div>
             </div>
           </div>
@@ -153,18 +154,18 @@ export default function AdminPage() {
                     {u.is_active ? (
                       <button onClick={() => handleToggleActive(u)} className="btn-ghost"
                         style={{ padding: '0.25rem 0.75rem', fontSize: '0.75rem', color: 'var(--red)', borderColor: 'rgba(239,68,68,0.3)' }}>
-                        🚫 Заблокировать
+                        Заблокировать
                       </button>
                     ) : (
                       <button onClick={() => handleToggleActive(u)} className="btn-ghost"
                         style={{ padding: '0.25rem 0.75rem', fontSize: '0.75rem', color: 'var(--green)', borderColor: 'rgba(34,197,94,0.3)' }}>
-                        ✅ Разблокировать
+                        Разблокировать
                       </button>
                     )}
                     {user.id !== u.id && (
-                      <button onClick={() => handleDeleteUser(u)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text3)', padding: '0.25rem 0.5rem', borderRadius: 6, fontSize: '0.875rem' }}
+                      <button onClick={() => handleDeleteUser(u)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text3)', padding: '0.25rem 0.5rem', borderRadius: 6, display: 'flex' }}
                         onMouseEnter={e => e.currentTarget.style.color = 'var(--red)'}
-                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text3)'}>✕</button>
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text3)'}><X size={15} /></button>
                     )}
                   </div>
                 </div>
@@ -190,21 +191,21 @@ export default function AdminPage() {
                 return (
                   <div key={p.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1rem', borderBottom: i < posts.length - 1 ? '1px solid var(--border)' : 'none' }}>
                     {img && <img src={img} alt="" style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 8, flexShrink: 0 }} />}
-                    {!img && <div style={{ width: 44, height: 44, background: 'var(--bg3)', borderRadius: 8, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📝</div>}
+                    {!img && <div style={{ width: 44, height: 44, background: 'var(--bg3)', borderRadius: 8, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><FileText size={20} color="var(--text3)" /></div>}
                     <Link to={`/posts/${p.id}`} style={{ flex: 1, minWidth: 0, textDecoration: 'none' }}>
                       <div style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 4 }}>
-                        {p.is_pinned && <span>📌</span>} {p.title || p.content.slice(0, 60)}
+                        {p.is_pinned && <Pin size={13} color="var(--yellow)" />} {p.title || p.content.slice(0, 60)}
                       </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text3)' }}>@{p.author.username} · ♥{p.likes_count} · {timeAgo(p.created_at)}</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text3)', display: 'flex', alignItems: 'center', gap: 4 }}>@{p.author.username} · <Heart size={11} /> {p.likes_count} · {timeAgo(p.created_at)}</div>
                     </Link>
                     <div style={{ display: 'flex', gap: '0.25rem', flexShrink: 0 }}>
                       <button onClick={() => handlePinPost(p)} title={p.is_pinned ? 'Открепить' : 'Закрепить'}
-                        style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', padding: '0.25rem', opacity: p.is_pinned ? 1 : 0.4, transition: 'opacity 0.15s' }}
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem', opacity: p.is_pinned ? 1 : 0.4, transition: 'opacity 0.15s', display: 'flex', color: 'var(--yellow)' }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
-                        onMouseLeave={e => e.currentTarget.style.opacity = p.is_pinned ? 1 : 0.4}>📌</button>
-                      <button onClick={() => handleDeletePost(p)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text3)', padding: '0.25rem 0.5rem', borderRadius: 6 }}
+                        onMouseLeave={e => e.currentTarget.style.opacity = p.is_pinned ? 1 : 0.4}><Pin size={16} /></button>
+                      <button onClick={() => handleDeletePost(p)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text3)', padding: '0.25rem 0.5rem', borderRadius: 6, display: 'flex' }}
                         onMouseEnter={e => e.currentTarget.style.color = 'var(--red)'}
-                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text3)'}>✕</button>
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text3)'}><X size={15} /></button>
                     </div>
                   </div>
                 )

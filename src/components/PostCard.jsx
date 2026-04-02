@@ -5,6 +5,7 @@ import { postsAPI, mediaURL } from '../services/api'
 import { timeAgo } from '../utils'
 import { useAuth } from '../context/AuthContext'
 import { useToast } from '../context/ToastContext'
+import { CheckCircle, Pin } from 'lucide-react'
 
 const HeartIcon = ({ filled }) => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill={filled ? '#ef4444' : 'none'} stroke={filled ? '#ef4444' : 'currentColor'} strokeWidth="1.8">
@@ -75,8 +76,8 @@ export default function PostCard({ post, onDelete, onLikeToggle }) {
           <div>
             <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 4 }}>
               {post.author.username}
-              {post.author.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11 }}>✓</span>}
-              {post.is_pinned && <span style={{ color: 'var(--yellow)', fontSize: 11 }}>📌</span>}
+              {post.author.is_verified && <span style={{ color: 'var(--accent)', fontSize: 11, display: 'inline-flex' }}><CheckCircle size={12} /></span>}
+              {post.is_pinned && <span style={{ color: 'var(--yellow)', fontSize: 11, display: 'inline-flex' }}><Pin size={12} /></span>}
             </div>
             {post.author.full_name && (
               <div style={{ fontSize: '0.75rem', color: 'var(--text3)' }}>{post.author.full_name}</div>

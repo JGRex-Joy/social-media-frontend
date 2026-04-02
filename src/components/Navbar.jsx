@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Avatar from './Avatar'
 import { notificationsAPI } from '../services/api'
+import { User, Settings, BarChart2, Shield, LogOut } from 'lucide-react'
 
 export default function Navbar() {
   const { user, logout } = useAuth()
@@ -148,18 +149,18 @@ export default function Navbar() {
                 </Link>
 
                 <div className="py-1.5">
-                  <MenuItem to={`/users/${user.id}`} icon="👤" label="Мой профиль" onClick={() => setShowMenu(false)} />
-                  <MenuItem to="/profile" icon="⚙️" label="Настройки" onClick={() => setShowMenu(false)} />
-                  <MenuItem to="/dashboard" icon="📊" label="Статистика" onClick={() => setShowMenu(false)} />
+                  <MenuItem to={`/users/${user.id}`} icon={<User size={15} />} label="Мой профиль" onClick={() => setShowMenu(false)} />
+                  <MenuItem to="/profile" icon={<Settings size={15} />} label="Настройки" onClick={() => setShowMenu(false)} />
+                  <MenuItem to="/dashboard" icon={<BarChart2 size={15} />} label="Статистика" onClick={() => setShowMenu(false)} />
                   {user.role === 'admin' && (
-                    <MenuItem to="/admin" icon="🛡️" label="Администрирование" onClick={() => setShowMenu(false)} />
+                    <MenuItem to="/admin" icon={<Shield size={15} />} label="Администрирование" onClick={() => setShowMenu(false)} />
                   )}
                 </div>
 
                 <div className="border-t border-gray-50 py-1.5">
                   <button onClick={handleLogout}
                     className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
-                    <span>🚪</span> Выйти
+                    <LogOut size={15} /> Выйти
                   </button>
                 </div>
               </div>

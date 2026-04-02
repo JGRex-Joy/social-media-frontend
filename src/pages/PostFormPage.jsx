@@ -5,11 +5,12 @@ import { useToast } from '../context/ToastContext'
 import { LoadingScreen, Spinner, PageHeader } from '../components/ui'
 import { getApiError } from '../utils'
 import api from '../services/api'
+import { Globe, Users, Lock } from 'lucide-react'
 
 const VISIBILITY = [
-  { value: 'public', label: '🌍 Все' },
-  { value: 'followers_only', label: '👥 Подписчики' },
-  { value: 'private', label: '🔒 Только я' },
+  { value: 'public', label: 'Все', icon: <Globe size={14} /> },
+  { value: 'followers_only', label: 'Подписчики', icon: <Users size={14} /> },
+  { value: 'private', label: 'Только я', icon: <Lock size={14} /> },
 ]
 
 export default function PostFormPage() {
@@ -209,9 +210,9 @@ export default function PostFormPage() {
                   border: `1px solid ${values.visibility === v.value ? 'var(--accent)' : 'var(--border2)'}`,
                   background: values.visibility === v.value ? 'var(--accent-glow)' : 'transparent',
                   color: values.visibility === v.value ? 'var(--accent)' : 'var(--text3)',
-                  transition: 'all 0.15s',
+                  transition: 'all 0.15s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
                 }}>
-                {v.label}
+                {v.icon} {v.label}
               </button>
             ))}
           </div>
