@@ -7,6 +7,7 @@ import Avatar from '../components/Avatar'
 import { LoadingScreen, Spinner } from '../components/ui'
 import { timeAgo } from '../utils'
 import { CheckCircle, Pencil, X } from 'lucide-react'
+import NotFoundPage from './NotFoundPage'
 
 const HeartIcon = ({ filled }) => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill={filled ? '#ef4444' : 'none'} stroke={filled ? '#ef4444' : 'currentColor'} strokeWidth="1.8">
@@ -128,6 +129,7 @@ export default function PostDetailPage() {
   const [liked, setLiked] = useState(preloaded?.is_liked || false)
   const [likesCount, setLikesCount] = useState(preloaded?.likes_count || 0)
   const [loading, setLoading] = useState(!preloaded)
+  const [notFound, setNotFound] = useState(false)
   const [commentLoading, setCommentLoading] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef(null)
@@ -141,8 +143,7 @@ export default function PostDetailPage() {
   postsAPI.getById(id)
     .then(r => { setPost(r.data); setLiked(r.data.is_liked); setLikesCount(r.data.likes_count) })
     .catch(() => {
-      // Только редиректим если нет preloaded данных
-      if (!preloaded) navigate('/posts')
+      setNotFound(true)
     })
     .finally(() => setLoading(false))
 }, [id])
@@ -173,6 +174,7 @@ export default function PostDetailPage() {
   }
 
   if (loading) return <LoadingScreen />
+  if (notFound) return <NotFoundPage />
   if (!post) return null
   const isOwner = user?.id === post.author_id
   const imgUrl = post.image_url ? mediaURL(post.image_url) : null
@@ -186,16 +188,13 @@ export default function PostDetailPage() {
 
       <div className="card" style={{ overflow: 'hidden' }}>
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-          {/* Image */}
           {imgUrl && (
             <div style={{ flex: '0 0 60%', minWidth: 280, background: 'var(--bg3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img src={imgUrl} alt={post.title || ''} style={{ width: '100%', maxHeight: 640, objectFit: 'contain', display: 'block' }} />
             </div>
           )}
 
-          {/* Right panel */}
           <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', minHeight: 500 }}>
-            {/* Author */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.875rem 1rem', borderBottom: '1px solid var(--border)' }}>
               <Link to={`/users/${post.author_id}`} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
                 <Avatar user={post.author} size="sm" />
@@ -219,7 +218,6 @@ export default function PostDetailPage() {
               )}
             </div>
 
-            {/* Content (text posts) */}
             {!imgUrl && (
               <div style={{ padding: '1rem', borderBottom: '1px solid var(--border)' }}>
                 {post.title && <h2 style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--text)', marginBottom: '0.5rem' }}>{post.title}</h2>}
@@ -227,7 +225,6 @@ export default function PostDetailPage() {
               </div>
             )}
 
-            {/* Comments list */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '0 1rem', maxHeight: 340 }}>
               {imgUrl && (
                 <div style={{ padding: '0.75rem 0', borderBottom: '1px solid var(--border)' }}>
@@ -245,7 +242,6 @@ export default function PostDetailPage() {
               ))}
             </div>
 
-            {/* Actions */}
             <div style={{ borderTop: '1px solid var(--border)', padding: '0.75rem 1rem 0.25rem' }}>
               <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem' }}>
                 <button onClick={handleLike} style={{ background: 'none', border: 'none', cursor: 'pointer', color: liked ? '#ef4444' : 'var(--text2)', display: 'flex' }}>
@@ -260,7 +256,6 @@ export default function PostDetailPage() {
               <div style={{ fontSize: '0.7rem', color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.625rem' }}>{timeAgo(post.created_at)}</div>
             </div>
 
-            {/* Add comment */}
             {user && (
               <form onSubmit={handleComment} style={{ borderTop: '1px solid var(--border)', padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <input value={commentText} onChange={e => setCommentText(e.target.value)}

@@ -103,14 +103,12 @@ export default function PostCard({ post, onDelete, onLikeToggle }) {
         )}
       </div>
 
-      {/* Image */}
       {imgUrl && (
         <Link to={`/posts/${post.id}`} style={{ display: 'block' }}>
           <img src={imgUrl} alt={post.title || ''} style={{ width: '100%', maxHeight: 520, objectFit: 'contain', display: 'block', background: 'var(--bg3)' }} />
         </Link>
       )}
 
-      {/* Text-only post */}
       {!imgUrl && (
         <Link to={`/posts/${post.id}`} style={{ display: 'block', padding: '0 1rem 0.75rem', textDecoration: 'none' }}>
           {post.title && <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.375rem' }}>{post.title}</h3>}
@@ -118,7 +116,6 @@ export default function PostCard({ post, onDelete, onLikeToggle }) {
         </Link>
       )}
 
-      {/* Actions */}
       <div style={{ padding: '0.625rem 1rem 0.875rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
           <button onClick={handleLike}
@@ -132,7 +129,6 @@ export default function PostCard({ post, onDelete, onLikeToggle }) {
           </Link>
         </div>
 
-        {/* Caption for image posts */}
         {imgUrl && (
           <div style={{ fontSize: '0.875rem', color: 'var(--text2)', lineHeight: 1.5 }}>
             <Link to={`/users/${post.author_id}`} style={{ fontWeight: 600, color: 'var(--text)', textDecoration: 'none', marginRight: '0.375rem' }}>{post.author.username}</Link>

@@ -97,7 +97,6 @@ export default function Sidebar({ mobileOpen, onClose, dark, onToggleTheme }) {
         </button>
       </div>
 
-      {/* User mini card */}
       <div
         style={{ margin: '0 0.75rem 0.75rem', padding: '0.75rem', background: 'var(--bg3)', borderRadius: 'var(--radius-sm)', cursor: 'pointer' }}
         onClick={() => navTo(`/users/${user.id}`)}
@@ -113,7 +112,6 @@ export default function Sidebar({ mobileOpen, onClose, dark, onToggleTheme }) {
         </div>
       </div>
 
-      {/* Nav */}
       <nav style={{ flex: 1, padding: '0 0.75rem', display: 'flex', flexDirection: 'column', gap: '2px' }}>
         <NavItem icon={icons.feed} label="Лента" active={isActive('/feed')} onClick={() => navTo('/feed')} />
         <NavItem icon={icons.posts} label="Публикации" active={isActive('/posts')} onClick={() => navTo('/posts')} />
@@ -130,7 +128,6 @@ export default function Sidebar({ mobileOpen, onClose, dark, onToggleTheme }) {
         )}
       </nav>
 
-      {/* Bottom actions */}
       <div style={{ padding: '1rem 0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         <button className="btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => navTo('/posts/create')}>
           {icons.plus} Новая публикация

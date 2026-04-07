@@ -75,12 +75,10 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-100">
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center gap-4">
 
-        {/* Logo */}
         <Link to="/feed" className="flex-shrink-0 mr-2">
           <span className="logo-font text-2xl text-gray-900">Pulse</span>
         </Link>
 
-        {/* Search */}
         <form onSubmit={handleSearch} className="hidden sm:block flex-1 max-w-xs">
           <div className="relative">
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -95,7 +93,6 @@ export default function Navbar() {
           </div>
         </form>
 
-        {/* Nav links */}
         <div className="flex items-center gap-1 ml-auto">
           {navLinks.map(({ to, label, icon }) => {
             const active = to === '/feed' ? path === '/feed' : path.startsWith(to)
@@ -107,7 +104,6 @@ export default function Navbar() {
             )
           })}
 
-          {/* Create post */}
           <Link to="/posts/create" title="Создать публикацию"
             className="p-2.5 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -116,7 +112,6 @@ export default function Navbar() {
             </svg>
           </Link>
 
-          {/* Notifications */}
           <Link to="/notifications" title="Уведомления"
             className={`relative p-2.5 rounded-xl transition-colors ${path === '/notifications' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'}`}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill={path === '/notifications' ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2">
@@ -129,7 +124,6 @@ export default function Navbar() {
             )}
           </Link>
 
-          {/* Avatar / profile menu */}
           <div className="relative ml-1" ref={menuRef}>
             <button onClick={() => setShowMenu(p => !p)}
               className="rounded-full ring-2 ring-transparent hover:ring-gray-200 transition-all">
@@ -138,7 +132,6 @@ export default function Navbar() {
 
             {showMenu && (
               <div className="absolute right-0 top-full mt-2 w-60 bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden fade-in z-50">
-                {/* User header */}
                 <Link to="/profile" onClick={() => setShowMenu(false)}
                   className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 border-b border-gray-50">
                   <Avatar user={user} size="md" />

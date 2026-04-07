@@ -72,7 +72,6 @@ export default function PostFormPage() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setLoading(true)
     try {
-      // Upload image first if a new file was selected
       let finalImageUrl = existingImageUrl
       if (imageFile) {
         setUploadingImage(true)
@@ -177,7 +176,6 @@ export default function PostFormPage() {
           style={{ fontWeight: 500 }}
         />
 
-        {/* Content */}
         <div>
           <textarea
             name="content"
@@ -197,7 +195,6 @@ export default function PostFormPage() {
           </div>
         </div>
 
-        {/* Visibility */}
         <div>
           <label style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.625rem' }}>
             Кто видит
@@ -218,7 +215,6 @@ export default function PostFormPage() {
           </div>
         </div>
 
-        {/* Submit */}
         <button
           type="button"
           onClick={handleSubmit}

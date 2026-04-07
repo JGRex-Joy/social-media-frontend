@@ -1,11 +1,9 @@
 import { formatDistanceToNow, format, parseISO } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
-// Parse date string properly — backend returns UTC without Z suffix sometimes
 const parseDate = (date) => {
   if (!date) return new Date()
   if (date instanceof Date) return date
-  // If string lacks timezone info, treat as UTC
   const s = String(date)
   if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(s) && !s.endsWith('Z') && !s.includes('+')) {
     return new Date(s + 'Z')

@@ -40,20 +40,17 @@ export default function LoginPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
-      {/* Background decoration */}
       <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
         <div style={{ position: 'absolute', top: '20%', left: '10%', width: 400, height: 400, background: 'var(--accent-glow)', borderRadius: '50%', filter: 'blur(80px)' }} />
         <div style={{ position: 'absolute', bottom: '20%', right: '10%', width: 300, height: 300, background: 'rgba(224,64,251,0.1)', borderRadius: '50%', filter: 'blur(80px)' }} />
       </div>
 
       <div style={{ width: '100%', maxWidth: 400, position: 'relative' }}>
-        {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <h1 className="logo-font" style={{ fontSize: '3rem', color: 'var(--text)', marginBottom: '0.5rem' }}>pulse</h1>
           <p style={{ color: 'var(--text3)', fontSize: '0.9rem' }}>Войдите, чтобы общаться с друзьями</p>
         </div>
 
-        {/* Card */}
         <div className="card" style={{ padding: '2rem', marginBottom: '1rem' }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
@@ -97,7 +94,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Bottom link */}
         <div className="card" style={{ padding: '1.25rem', textAlign: 'center' }}>
           <span style={{ fontSize: '0.875rem', color: 'var(--text2)' }}>Нет аккаунта? </span>
           <Link to="/register" style={{ fontSize: '0.875rem', color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>Зарегистрироваться</Link>

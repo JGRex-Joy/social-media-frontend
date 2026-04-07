@@ -82,7 +82,6 @@ export default function AdminPage() {
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '1.5rem 1.25rem 3rem' }}>
       <PageHeader title="Администрирование" subtitle="Управление платформой" />
 
-      {/* Tabs */}
       <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '1.5rem' }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => handleTabChange(t.key)} style={{
@@ -95,7 +94,6 @@ export default function AdminPage() {
         ))}
       </div>
 
-      {/* Stats */}
       {tab === 'stats' && (loading ? <LoadingScreen /> : stats && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
@@ -128,7 +126,6 @@ export default function AdminPage() {
         </div>
       ))}
 
-      {/* Users */}
       {tab === 'users' && (
         <>
           <form onSubmit={e => { e.preventDefault(); loadUsers() }} style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
@@ -175,7 +172,6 @@ export default function AdminPage() {
         </>
       )}
 
-      {/* Posts */}
       {tab === 'posts' && (
         <>
           <form onSubmit={e => { e.preventDefault(); loadPosts() }} style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>

@@ -38,7 +38,6 @@ export default function DashboardPage() {
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1.25rem 3rem' }}>
       <PageHeader title="Статистика" />
 
-      {/* Profile summary */}
       <div className="card" style={{ padding: '1.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
         <Avatar user={user} size="xl" />
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -49,7 +48,6 @@ export default function DashboardPage() {
         <Link to="/profile" className="btn-ghost" style={{ padding: '0.5rem 1rem', flexShrink: 0 }}>Редактировать</Link>
       </div>
 
-      {/* Stats grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
         <StatCard label="Публикаций" value={user.posts_count} icon={<FileText size={28} />} />
         <StatCard label="Подписчиков" value={user.followers_count} icon={<Users size={28} />} />
@@ -58,7 +56,6 @@ export default function DashboardPage() {
         <StatCard label="Комментарии" value={totalComments} icon={<MessageSquare size={28} />} />
       </div>
 
-      {/* Recent posts */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text)' }}>Последние публикации</h2>
         <Link to="/posts/create" className="btn-primary" style={{ padding: '0.375rem 0.875rem', fontSize: '0.8rem' }}>+ Новая</Link>

@@ -13,7 +13,6 @@ export default function HomePage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.25rem', position: 'relative', overflow: 'hidden' }}>
-      {/* Glow background */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
         <div style={{ position: 'absolute', top: '20%', left: '20%', width: 500, height: 500, background: 'var(--accent-glow)', borderRadius: '50%', filter: 'blur(100px)' }} />
         <div style={{ position: 'absolute', bottom: '20%', right: '20%', width: 350, height: 350, background: 'rgba(224,64,251,0.1)', borderRadius: '50%', filter: 'blur(100px)' }} />

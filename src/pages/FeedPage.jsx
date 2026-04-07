@@ -58,9 +58,7 @@ export default function FeedPage() {
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '1.5rem 1.25rem' }}>
       <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', alignItems: 'flex-start' }}>
 
-        {/* Feed column */}
         <div style={{ width: '100%', maxWidth: 480 }}>
-          {/* Stories */}
           <div className="card" style={{ padding: '1rem', marginBottom: '1rem', overflowX: 'auto' }}>
             <StoriesBar currentUser={user} />
           </div>
@@ -89,7 +87,6 @@ export default function FeedPage() {
           )}
         </div>
 
-        {/* Right sidebar - suggestions */}
         <div style={{ width: 280, flexShrink: 0, display: 'none' }} className="lg-sidebar">
           <div style={{ position: 'sticky', top: '1.5rem' }}>
             {user && (

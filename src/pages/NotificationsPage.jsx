@@ -83,7 +83,6 @@ export default function NotificationsPage() {
               onMouseEnter={e => e.currentTarget.style.background = 'var(--bg3)'}
               onMouseLeave={e => e.currentTarget.style.background = !n.is_read ? 'rgba(124,106,247,0.06)' : 'transparent'}
             >
-              {/* Avatar with type badge */}
               <div style={{ position: 'relative', flexShrink: 0 }}>
                 {n.actor ? (
                   <Link to={`/users/${n.actor.id}`} onClick={e => e.stopPropagation()}>
@@ -99,7 +98,6 @@ export default function NotificationsPage() {
                 </span>
               </div>
 
-              {/* Text */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{ fontSize: '0.875rem', color: 'var(--text2)', lineHeight: 1.5 }}>
                   {n.actor && (

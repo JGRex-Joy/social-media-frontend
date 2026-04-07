@@ -8,6 +8,8 @@ import { LoadingScreen, EmptyState, Pagination, Spinner } from '../components/ui
 import { formatDate } from '../utils'
 import { CheckCircle, Camera, UserX, Heart, MessageSquare } from 'lucide-react'
 
+import NotFoundPage from './NotFoundPage'
+
 export default function UserProfilePage() {
   const { id } = useParams()
   const { user: me } = useAuth()
@@ -20,6 +22,7 @@ export default function UserProfilePage() {
   const [following, setFollowing] = useState(false)
   const [followLoading, setFollowLoading] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
   const [tab, setTab] = useState('posts')
   const [followers, setFollowers] = useState([])
   const [followingList, setFollowingList] = useState([])
@@ -29,7 +32,7 @@ export default function UserProfilePage() {
     setLoading(true)
     usersAPI.getById(id)
       .then(r => { setProfile(r.data); setFollowing(r.data.is_following) })
-      .catch(() => navigate('/users'))
+      .catch(() => setNotFound(true))
       .finally(() => setLoading(false))
     loadPosts(1)
   }, [id])
@@ -67,6 +70,7 @@ export default function UserProfilePage() {
   }
 
   if (loading) return <LoadingScreen />
+  if (notFound) return <NotFoundPage />
   if (!profile) return null
   const isMe = me?.id === profile.id
   const socialList = tab === 'followers' ? followers : followingList

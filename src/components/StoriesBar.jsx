@@ -50,7 +50,6 @@ function StoryViewer({ stories, startIndex, onClose, onDelete, currentUserId }) 
     <div className="overlay" onClick={onClose}>
       <div style={{ position: 'relative', width: '100%', maxWidth: 380, maxHeight: '90vh', aspectRatio: '9/16', background: '#000', borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
         onClick={e => e.stopPropagation()}>
-        {/* Progress bars */}
         <div style={{ position: 'absolute', top: 10, left: 10, right: 10, display: 'flex', gap: 4, zIndex: 10 }}>
           {stories.map((_, i) => (
             <div key={i} style={{ flex: 1, height: 2, background: 'rgba(255,255,255,0.3)', borderRadius: 999, overflow: 'hidden' }}>
@@ -58,7 +57,6 @@ function StoryViewer({ stories, startIndex, onClose, onDelete, currentUserId }) 
             </div>
           ))}
         </div>
-        {/* Header */}
         <div style={{ position: 'absolute', top: 22, left: 12, right: 12, display: 'flex', alignItems: 'center', gap: 8, zIndex: 10 }}>
           <Avatar user={story.author} size="sm" />
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -69,15 +67,12 @@ function StoryViewer({ stories, startIndex, onClose, onDelete, currentUserId }) 
           )}
           <button onClick={onClose} style={{ color: '#fff', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.25rem', lineHeight: 1, display: 'flex' }}><X size={20} /></button>
         </div>
-        {/* Image */}
         <img src={mediaURL(story.image_url)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        {/* Caption */}
         {story.caption && (
           <div style={{ position: 'absolute', bottom: 70, left: 12, right: 12, zIndex: 10 }}>
             <p style={{ color: '#fff', fontSize: '0.875rem', textAlign: 'center', background: 'rgba(0,0,0,0.4)', borderRadius: 10, padding: '8px 12px', backdropFilter: 'blur(4px)' }}>{story.caption}</p>
           </div>
         )}
-        {/* Comment */}
         <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12, zIndex: 10 }}>
           <form onSubmit={handleComment} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <input value={comment} onChange={e => setComment(e.target.value)} onClick={e => e.stopPropagation()}
@@ -89,7 +84,6 @@ function StoryViewer({ stories, startIndex, onClose, onDelete, currentUserId }) 
             </button>
           </form>
         </div>
-        {/* Tap zones */}
         <button style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '33%', background: 'none', border: 'none', cursor: 'pointer', zIndex: 5 }} onClick={prev} />
         <button style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '33%', background: 'none', border: 'none', cursor: 'pointer', zIndex: 5 }} onClick={next} />
       </div>

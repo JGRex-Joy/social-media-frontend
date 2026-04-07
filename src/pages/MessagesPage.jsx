@@ -26,7 +26,6 @@ export default function MessagesPage() {
   const pollRef = useRef(null)
   const fileRef = useRef(null)
 
-  // Load inbox + all users at once
   const loadInbox = useCallback(async () => {
     try {
       const [inboxR, usersR] = await Promise.all([
@@ -41,7 +40,6 @@ export default function MessagesPage() {
 
   useEffect(() => { loadInbox() }, [loadInbox])
 
-  // Load conversation when userId changes
   useEffect(() => {
     if (!userId) { setActiveUser(null); setMessages([]); return }
     loadConversation(userId)
@@ -113,10 +111,8 @@ export default function MessagesPage() {
 
   const isMine = (msg) => msg.sender_id === me?.id
 
-  // Conversation ids set for "Поздоровайтесь!" logic
   const conversationUserIds = new Set(conversations.map(c => String(c.user.id)))
 
-  // Filtered user list for sidebar: search instantly
   const q = searchQ.trim().toLowerCase()
   const filteredUsers = q
     ? allUsers.filter(u =>
@@ -125,22 +121,18 @@ export default function MessagesPage() {
       )
     : allUsers
 
-  // Build merged sidebar list: existing convos first, then users without convos
   const usersWithConvo = conversations.map(c => c.user.id)
   const usersWithoutConvo = filteredUsers.filter(u => !usersWithConvo.includes(u.id))
 
-  // Group messages by date
   const grouped = groupByDate(messages)
 
   return (
     <div className="chat-layout" style={{ height: '100vh' }}>
-      {/* Sidebar */}
       <div className={`chat-sidebar ${userId ? 'hidden-mobile' : ''}`}>
         <div style={{ padding: '1.25rem 1rem 0.75rem' }}>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem', fontFamily: 'Montserrat, sans-serif' }}>
             Сообщения
           </h2>
-          {/* Instant search */}
           <div style={{ position: 'relative' }}>
             <svg style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text3)', pointerEvents: 'none' }}
               width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -177,7 +169,6 @@ export default function MessagesPage() {
             ))
           ) : (
             <>
-              {/* Existing conversations */}
               {!q && conversations.map(conv => {
                 const isActive = String(conv.user.id) === String(userId)
                 const unread = conv.unread_count > 0
@@ -196,7 +187,6 @@ export default function MessagesPage() {
                 )
               })}
 
-              {/* All other users (no conversation yet) */}
               {!q && usersWithoutConvo.length > 0 && (
                 <>
                   {conversations.length > 0 && <div className="divider" style={{ margin: '0.25rem 0' }} />}
@@ -219,7 +209,6 @@ export default function MessagesPage() {
                 </>
               )}
 
-              {/* Search results */}
               {q && (
                 filteredUsers.length === 0 ? (
                   <div style={{ padding: '2rem 1rem', textAlign: 'center', color: 'var(--text3)', fontSize: '0.875rem' }}>
@@ -244,7 +233,6 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      {/* Chat main */}
       <div className="chat-main" style={{ background: 'var(--bg)' }}>
         {!userId ? (
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--text3)', gap: '0.75rem' }}>
@@ -256,7 +244,6 @@ export default function MessagesPage() {
           </div>
         ) : (
           <>
-            {/* Header */}
             <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid var(--border)', background: 'var(--bg2)', display: 'flex', alignItems: 'center', gap: '0.875rem', flexShrink: 0 }}>
               <button onClick={() => navigate('/messages')}
                 style={{ background: 'none', border: 'none', color: 'var(--text2)', cursor: 'pointer', padding: 4, display: 'flex' }}
@@ -274,7 +261,6 @@ export default function MessagesPage() {
               )}
             </div>
 
-            {/* Messages */}
             <div className="chat-messages">
               {msgLoading ? (
                 <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '2rem' }}>
@@ -338,7 +324,6 @@ export default function MessagesPage() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
             <form className="chat-input-bar" onSubmit={sendMessage}>
               <input ref={fileRef} type="file" accept="image/*" onChange={sendImage} style={{ display: 'none' }} />
               <button type="button" onClick={() => fileRef.current?.click()}
@@ -372,7 +357,6 @@ export default function MessagesPage() {
   )
 }
 
-// Reusable sidebar row
 function ConvoRow({ user, isActive, unread, unreadCount, lastMsg, meId, onClick, isNew }) {
   return (
     <button
